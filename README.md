@@ -1,2 +1,2 @@
 # nfcs.management
-Team competences growing and productivity helper solution.
+Team competencies growing and productivity helper solution.
