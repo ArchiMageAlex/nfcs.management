@@ -6,13 +6,13 @@
  
     <!-- Add Support for Spring -->
     <!-- Создает Spring Container, доступный всем сервлетам и фильтрам -->
-<!--   <context-param>
+   <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+    </listener>
  
     <!-- Обрабатывает все запросы. Центральное понятие-->
     <servlet>
