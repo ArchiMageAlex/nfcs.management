@@ -1,5 +1,7 @@
 package com.sbt.management.ital.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +30,13 @@ public class MainController {
 	}
 
 	@RequestMapping("/person/{id}")
-	public String product(@PathVariable Long id, Model model) {
-		model.addAttribute("product", personRepository.findById(id));
-		return "product";
+	public String person(@PathVariable Long id, Model model) {
+		model.addAttribute("person", personRepository.findById(id));
+		return "person";
 	}
 
 	@RequestMapping(value = "/persons", method = RequestMethod.GET)
-	public String productsList(Model model) {
+	public String personsList(Model model) {
 		model.addAttribute("persons", personRepository.findAll());
 		return "persons";
 	}
@@ -44,6 +46,11 @@ public class MainController {
 	public String savePerson(@RequestBody Person person) {
 		personRepository.save(person);
 		return person.getId().toString();
+	}
+	
+	@ModelAttribute("allPersons")
+	public List<Person> populatePersons() {
+	    return this.personRepository.findAll();
 	}
 
 }

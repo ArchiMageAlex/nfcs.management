@@ -1,10 +1,49 @@
-<HTML>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Persons</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+<style>
+.navigation-order {
+	margin-bottom: 30px;
+}
+</style>
+</head>
 <BODY>
-<H1>
-Persons
-</H1>
-<P>
-
-</P>
-</BODY>
+	<div class="container">
+		<div class="row">
+			<H1>Persons</H1>
+			<TABLE>
+				<THEAD>
+					<TR>
+						<TH>First name</TH>
+						<TH>Last name</TH>
+					</TR>
+				</THEAD>
+				<tbody>
+					<tr th:each="p : ${persons}">
+						<td th:text="${p.FirstName}"></td>
+						<td th:text="${p.LastName}"></td>
+					</tr>
+				</tbody>
+			</TABLE>
+		</div>
+		<div class="row">
+			<form>
+				<div class="form-group">
+					<label for="firstname">First Name:</label> <input type="text"
+						class="form-control" id="first_name" />
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last Name:</label> <input type="text"
+						class="form-control" id="last_name" />
+				</div>
+				<button type="submit" class="btn btn-default" id="btn_submit">Add
+					New Person</button>
+			</form>
+		</div>
+	</div>
+<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script></BODY>
 </HTML>
