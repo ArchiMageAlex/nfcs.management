@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerFragment">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel='stylesheet'
+	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body>
+	<div class="container" style="padding-top: 50px;">
+		<div th:fragment="authFragment">
+			<div class="row">
+				<div class="alert alert-danger" th:if="${error ne null}">Error:
+					${error}</div>
+				<a class="btn btn-lg btn-primary" th:href="${loginUrl}">Click
+					here to login</a>
+			</div>
+			<div class="row">
+				<h2 data-th-text="${authCode}">Auth code</h2>
+				<h2 data-th-text="${idToken}">ID token</h2>
+				<h2 data-th-text="${accessToken}">Access token</h2>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
