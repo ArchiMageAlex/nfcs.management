@@ -1,18 +1,21 @@
 package com.sbt.management.ital.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sbt.management.ital.AuthHelper;
+import com.sbt.management.ital.auth.AuthHelper;
 
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 @Controller
 public class WebController {
+	Logger LOG = Logger.getLogger(WebController.class.getName());
 
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
@@ -25,14 +28,17 @@ public class WebController {
 
 		String loginUrl = AuthHelper.getLoginUrl(state, nonce);
 		model.addAttribute("loginUrl", loginUrl);
-		System.out.println(session.getAttribute("authCode"));
 
+		if (request.getParameter("name") != null)
+			model.addAttribute("name", request.getParameter("name"));
+
+		if (request.getSession().getAttribute("userConnected") != null)
+			model.addAttribute(request.getSession().getAttribute("userConnected"));
 		return "main";
 	}
 
 	@RequestMapping("/main")
 	public String main(Model model, HttpServletRequest request) {
-		System.out.println(request.getSession().getAttribute("authCode"));
 		return index(model, request);
 	}
 }

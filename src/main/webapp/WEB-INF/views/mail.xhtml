@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head th:fragment="header">
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel='stylesheet'
+	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body>
+	<div class="container">
+		<div th:include="layout :: authFragment" class="row"></div>
+		<div class="row">
+			<TABLE class="table table-bordered">
+				<THEAD>
+					<TR>
+						<th><span class="glyphicon glyphicon-envelope"></span></th>
+						<TH>From</TH>
+						<TH>Subject</TH>
+						<TH>Received</TH>
+						<TH>Preview</TH>
+					</TR>
+				</THEAD>
+				<tbody>
+					<tr th:each="m : ${messages}"
+						class="${m.isRead == true ? '' : 'info'}">
+						<td><h:if test="${m.isRead == false}">
+								<span class="glyphicon glyphicon-envelope"></span>
+							</h:if></td>
+						<td th:text="${m.from.emailAddress.name}" />
+						<td th:text="${m.subject}" />
+						<td th:text="${m.receivedDateTime}" />
+						<td th:text="${m.bodyPreview}" />
+					</tr>
+				</tbody>
+			</TABLE>
+		</div>
+	</div>
+	<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</BODY>
+</body>
+</html>
