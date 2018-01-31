@@ -29,11 +29,8 @@ public class WebController {
 		String loginUrl = AuthHelper.getLoginUrl(state, nonce);
 		model.addAttribute("loginUrl", loginUrl);
 
-		if (request.getParameter("name") != null)
-			model.addAttribute("name", request.getParameter("name"));
-
-		if (request.getSession().getAttribute("userConnected") != null)
-			model.addAttribute(request.getSession().getAttribute("userConnected"));
+		/*if (request.getSession().getAttribute("userConnected") != null)
+			model.addAttribute(request.getSession().getAttribute("userConnected"));*/
 		return "main";
 	}
 

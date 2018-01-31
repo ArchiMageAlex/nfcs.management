@@ -42,6 +42,7 @@ public class AuthController {
 			if (idTokenObj != null) {
 				TokenResponse tokenResponse = AuthHelper.getTokenFromAuthCode(code, idTokenObj.getTenantId());
 				// Get user info
+				if(tokenResponse != null) {
 				OutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokenResponse.getAccessToken(),
 						null);
 				User user;
@@ -55,6 +56,9 @@ public class AuthController {
 				session.setAttribute("userConnected", true);
 				session.setAttribute("userName", idTokenObj.getName());
 				session.setAttribute("userTenantId", idTokenObj.getTenantId());
+				} else {
+					session.setAttribute("error", "ID token response is null.");
+				}
 			} else {
 				session.setAttribute("error", "ID token failed validation.");
 			}

@@ -19,6 +19,7 @@ import com.sbt.management.ital.service.outlook.Message;
 import com.sbt.management.ital.service.outlook.OutlookService;
 import com.sbt.management.ital.service.outlook.OutlookServiceBuilder;
 import com.sbt.management.ital.service.outlook.PagedResult;
+import org.apache.commons.text.StringEscapeUtils;
 
 @Controller
 public class MailController {
@@ -43,13 +44,12 @@ public class MailController {
 
 		OutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokens.getAccessToken(), email);
 
-		// Retrieve messages from the inbox
 		String folder = "inbox";
-		// Sort by time received in descending order
+
 		String sort = "receivedDateTime DESC";
-		// Only return the properties we care about
+
 		String properties = "receivedDateTime,from,isRead,subject,bodyPreview";
-		// Return at most 10 messages
+
 		Integer maxResults = 10;
 
 		try {

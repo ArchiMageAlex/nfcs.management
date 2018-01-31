@@ -20,7 +20,7 @@ public class TokenResponse {
   @JsonProperty("id_token")
   private String idToken;
   private String error;
-  @JsonProperty("error_description")
+  @JsonProperty("error_description") 
   private String errorDescription;
   @JsonProperty("error_codes")
   private int[] errorCodes;

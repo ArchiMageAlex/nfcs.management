@@ -5,6 +5,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -27,17 +29,7 @@ public class OutlookServiceBuilder {
 		Interceptor requestInterceptor = new Interceptor() {
 			public Response intercept(Interceptor.Chain chain) throws IOException {
 				Request original = chain.request();
-/*				ResponseBody modifiedBody = null;
-				Response orig = chain.proceed(original);
-				Response modifiedResponse = null;
-				
-				if (original.body() != null) {
-					MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-					modifiedResponse = orig.newBuilder().body(modifiedBody).build();
-					LOG.info("Request body was modified from utf-8");
-				}
-*/
-				Builder builder = original.newBuilder().header("User-Agent", "java-tutorial")
+				Builder builder = original.newBuilder().header("User-Agent", "nfcs.management")
 						.header("client-request-id", UUID.randomUUID().toString())
 						.header("return-client-request-id", "true")
 						.header("Content-Type", "application/json; charset=utf-8")
@@ -49,7 +41,23 @@ public class OutlookServiceBuilder {
 				}
 
 				Request request = builder.build();
-				return chain.proceed(request);
+
+				Response orig = chain.proceed(request);
+				ResponseBody modifiedBody = null;
+				Response modifiedResponse = null;
+
+				if (orig.body() != null) {
+					MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+					modifiedBody = ResponseBody.create(mediaType, orig.body().bytes());//StringEscapeUtils.unescapeJava(orig.body().string()));
+					modifiedResponse = orig.newBuilder().addHeader("Content-Type", "application/json; charset=utf-8")
+							.body(modifiedBody).build();
+					//LOG.info("Request body was recoded from utf-8: " + modifiedResponse.body().string());
+				} else {
+					LOG.info("Original request body was null");
+					modifiedResponse = orig;
+				}
+
+				return modifiedResponse;
 			}
 		};
 

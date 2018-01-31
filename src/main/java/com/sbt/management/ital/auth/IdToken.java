@@ -1,7 +1,9 @@
 package com.sbt.management.ital.auth;
 
+import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IdToken {
+	static Logger LOG = Logger.getLogger(IdToken.class.getName());
 	// NOTE: This is just a subset of the claims returned in the
 	// ID token. For a full listing, see:
 	// https://azure.microsoft.com/ru-ru/documentation/articles/active-directory-v2-tokens/#idtokens
@@ -22,7 +25,7 @@ public class IdToken {
 	private String nonce;
 	private String name;
 	private String email;
-	@JsonProperty("preferred_username")
+	@JsonProperty("preferred_username") 
 	private String preferredUsername;
 	@JsonProperty("oid")
 	private String objectId;

@@ -14,7 +14,7 @@ public interface OutlookService {
   Call<PagedResult<Message>> getMessages(
     @Path("folderid") String folderId,
     @Query("$orderby") String orderBy,
-    @Query("$select") String select,
+    @Query("$select") String select, 
     @Query("$top") Integer maxResults
   );
 }

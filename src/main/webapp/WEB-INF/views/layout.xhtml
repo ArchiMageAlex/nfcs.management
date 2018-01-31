@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="headerFragment">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" lang="ru_RU" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+	lang="ru_RU" />
 <link rel='stylesheet'
 	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
 </head>
@@ -10,12 +11,9 @@
 	<div class="container" style="padding-top: 50px;">
 		<div th:fragment="authFragment">
 			<div class="row">
-				Logged user: <span sec:authentication="name">Anonymous</span>
-				<div class="alert alert-danger" th:if="${error ne null}">
-					<th:text th-data-text="Error: ${error}" />
+				<div class="alert alert-danger" th:if="${session.error ne null}">
+					<th:text th-data-text="Error: ${session.error}" />
 				</div>
-				<a class="btn btn-lg btn-primary" th:href="${loginUrl}">Click
-					here to login</a>
 				<!-- Static navbar -->
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
@@ -37,10 +35,13 @@
 									th:if="${session.userConnected}"><a th:href="mail">Mail</a></li>
 							</ul>
 							<div th:if="${session.userConnected}">
-								<th:text class="navbar-text navbar-right"
-									th-data-text="Signed in as ${userName}" />
 								<ul class="nav navbar-nav navbar-right">
 									<li><a th:href="logout">Logout</a></li>
+								</ul>
+							</div>
+							<div th:if="${!(session.userConnected?:false)}">
+								<ul class="nav navbar-nav navbar-right">
+									<li><a th:href="${loginUrl}">Login</a></li>
 								</ul>
 							</div>
 						</div>

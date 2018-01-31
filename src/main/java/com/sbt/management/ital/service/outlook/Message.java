@@ -28,7 +28,7 @@ public class Message {
   public Recipient getFrom() {
     return from;
   }
-  public void setFrom(Recipient from) {
+  public void setFrom(Recipient from) { 
     this.from = from;
   }
   public Boolean getIsRead() {
