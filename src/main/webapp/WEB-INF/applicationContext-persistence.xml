@@ -38,7 +38,7 @@
       </props>
     </property>
     <!-- Set base package of your entities -->
-    <property name="packagesToScan" value="com.sbt.management.ital.model"/>
+    <property name="packagesToScan" value="com.nfcs.management.ital.model"/>
     <!-- Set share cache mode -->
     <property name="sharedCacheMode" value="ENABLE_SELECTIVE"/>
     <!-- Set validation mode -->
@@ -58,5 +58,5 @@
     Configure Spring Data JPA and set the base package of the 
     repository interfaces 
   -->
-  <jpa:repositories base-package="com.sbt.management.ital.repos"/>
+  <jpa:repositories base-package="com.nfcs.management.ital.repos" /> <!--  factory-class="com.nfcs.management.ital.repos.BaseEntityRepositoryFactoryBean"/> -->
 </beans>

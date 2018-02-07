@@ -19,7 +19,7 @@
 	<mvc:resources mapping="/webjars/**"
 		location="classpath:/META-INF/resources/webjars/" />
 
-	<context:component-scan base-package="com.sbt.management.ital.controller" />
+	<context:component-scan base-package="com.nfcs.management.ital.controller" />
 
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -36,7 +36,7 @@
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
 	</bean>
 
-	<bean class="com.sbt.management.ital.ServletContextFactory" id="servletContext" />
+	<bean class="com.nfcs.management.ital.ServletContextFactory" id="servletContext" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

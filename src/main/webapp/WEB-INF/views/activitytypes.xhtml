@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Persons</title>
+<title>Типы активностей</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel='stylesheet'
 	href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
@@ -14,32 +14,33 @@
 <BODY>
 	<div class="container">
 		<div th:include="layout :: authFragment" class="row"></div>
+
 		<div class="row">
-			<H1>Лица</H1>
+			<H1>Типы активностей</H1>
 			<TABLE class="table table-bordered">
 				<THEAD>
 					<TR>
-						<TH>Имя</TH>
-						<TH>Фамилия</TH>
+						<TH>Наименование</TH>
+						<TH>Описание</TH>
 					</TR>
 				</THEAD>
 				<tbody>
-					<tr th:each="p : ${entities}">
-						<td th:text="${p.FirstName}"></td>
-						<td th:text="${p.LastName}"></td>
+					<tr th:each="at : ${entities}">
+						<td th:text="${at.name}"></td>
+						<td th:text="${at.description}"></td>
 					</tr>
 				</tbody>
 			</TABLE>
 		</div>
 		<div class="row">
-			<form action="saveperson" method="post">
+			<form action="saveactivitytype" method="post">
 				<div class="form-group">
-					<label for="first_name">Имя:</label> <input type="text"
-						class="form-control" id="first_name" />
+					<label for="name">Наименование:</label> <input type="text"
+						class="form-control" id="name" />
 				</div>
 				<div class="form-group">
-					<label for="last_name">Фамилия:</label> <input type="text"
-						class="form-control" id="last_name" />
+					<label for="description">Описание:</label> <input type="text"
+						class="form-control" id="description" />
 				</div>
 				<button type="submit" class="btn btn-default" id="btn_submit">Добавить</button>
 			</form>
@@ -50,31 +51,32 @@
 		src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script type="application/javascript">
 		
+		
     $(document).ready(function () {
        $('#btn_submit').on("click",function (e) {
            e.preventDefault();
-           var firstName, lastName;
-           firstName = $('#first_name').val();
-           lastName = $('#last_name').val();
-           if($.trim(firstName) === ""){
-               alert("First name cannot be empty");
+           var name, description;
+           name = $('#name').val();
+           description = $('#description').val();
+           if($.trim(name) === ""){
+               alert("Name cannot be empty");
            }
-           else if($.trim(lastName) === ""){
-               alert("Last name cannot be empty");
+           else if($.trim(description) === ""){
+               alert("Description cannot be empty");
            }
            else {
                var data = {};
-               data["firstName"] = firstName;
-               data["lastName"] = lastName;
+               data["name"] = name;
+               data["description"] = description;
                $.ajax({
                    type: "POST",
                    contentType: "application/json",
-                   url: "/ita-1/persons/save",
+                   url: "/ita-1/activitytypes/save",
                    data: JSON.stringify(data),
                    dataType: 'json',
                    timeout: 6000,
                    success: function (data) {
-                       if (confirm("Person with Id " + data + " Saved")){
+                       if (confirm("Activity type with Id " + data + " saved")){
                            window.location.reload();
                        }
                    }
@@ -83,6 +85,7 @@
        });
     });
 
+	
 	</script>
 </BODY>
 </HTML>
