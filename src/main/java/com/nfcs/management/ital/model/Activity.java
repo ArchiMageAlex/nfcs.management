@@ -1,5 +1,8 @@
 package com.nfcs.management.ital.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Activity extends BaseEntity {
 
 	private ActivityType activityType;

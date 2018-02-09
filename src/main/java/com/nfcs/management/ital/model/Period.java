@@ -1,5 +1,8 @@
 package com.nfcs.management.ital.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Period extends BaseEntity {
 	private String name;
 	private int value;
