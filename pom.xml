@@ -23,7 +23,11 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>${apache.tiles.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.metawidget.modules</groupId>
+			<artifactId>metawidget-all</artifactId>
+			<version>4.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -118,11 +122,10 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>2.0.2.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.1-901-1.jdbc4</version>
+			<version>42.2.1</version>
 		</dependency>
 
 		<dependency>
@@ -238,7 +241,7 @@
 							<goal>deploy-artifact</goal>
 						</goals>
 						<configuration>
-							<groupId>postgresql</groupId>
+							<groupId>org.postgresql</groupId>
 							<artifactId>postgresql</artifactId>
 							<name>postgresql.jar</name>
 						</configuration>
@@ -256,7 +259,7 @@
 									<properties>
 										<jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
 										<enabled>true</enabled>
-										<connection-url>jdbc:postgresql://192.168.99.100:5432/postgres</connection-url>
+										<connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
 										<driver-class>org.postgresql.Driver</driver-class>
 										<driver-name>postgresql.jar</driver-name>
 										<user-name>postgres</user-name>

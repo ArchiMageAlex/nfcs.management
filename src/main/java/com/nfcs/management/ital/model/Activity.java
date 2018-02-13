@@ -1,8 +1,13 @@
 package com.nfcs.management.ital.model;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Activity extends BaseEntity {
 
 	private ActivityType activityType;
@@ -13,6 +18,7 @@ public class Activity extends BaseEntity {
 	private Metric metric;
 	private double metricValue;
 	
+	@ManyToOne(targetEntity = ActivityType.class)
 	public ActivityType getActivityType() {
 		return activityType;
 	}
@@ -31,9 +37,11 @@ public class Activity extends BaseEntity {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	@ManyToOne(targetEntity = Period.class)
 	public Period getPeriod() {
 		return period;
-	}
+	}	
 	public void setPeriod(Period period) {
 		this.period = period;
 	}
@@ -43,6 +51,8 @@ public class Activity extends BaseEntity {
 	public void setJobCost(double jobCost) {
 		this.jobCost = jobCost;
 	}
+
+	@ManyToOne(targetEntity = Metric.class)
 	public Metric getMetric() {
 		return metric;
 	}
@@ -56,10 +66,12 @@ public class Activity extends BaseEntity {
 		this.metricValue = metricValue;
 	}
 	
+	@Transient
 	public double getYearTotal() {
 		return this.metricValue * this.period.getValue();
 	}
 	
+	@Transient
 	public double getMonthTotal() {
 		return this.getYearTotal() / 12;
 	}
