@@ -209,88 +209,91 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.2</version>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.webjars</groupId>
-									<artifactId>bootstrap</artifactId>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}/classes</outputDirectory>
-									<excludes>**/maven/**, **/*.MF</excludes>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-maven-plugin</artifactId>
-				<version>1.2.1.Final</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>deploy-artifact</goal>
-						</goals>
-						<configuration>
-							<groupId>org.postgresql</groupId>
-							<artifactId>postgresql</artifactId>
-							<name>postgresql.jar</name>
-						</configuration>
-					</execution>
-					<execution>
-						<id>add-datasource</id>
-						<phase>package</phase>
-						<goals>
-							<goal>add-resource</goal>
-						</goals>
-						<configuration>
-							<address>subsystem=datasources,data-source=PostgreSQLDS</address>
-							<resources>
-								<resource>
-									<properties>
-										<jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
-										<enabled>true</enabled>
-										<connection-url>jdbc:postgresql://postgres:5432/postgres</connection-url>
-										<driver-class>org.postgresql.Driver</driver-class>
-										<driver-name>postgresql.jar</driver-name>
-										<user-name>postgres</user-name>
-										<password>postgres</password>
-									</properties>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
 
 	<profiles>
+		<profile>
+			<id>default</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>3.0.2</version>
+						<executions>
+							<execution>
+								<id>unpack</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>org.webjars</groupId>
+											<artifactId>bootstrap</artifactId>
+											<overWrite>false</overWrite>
+											<outputDirectory>${project.build.directory}/classes</outputDirectory>
+											<excludes>**/maven/**, **/*.MF</excludes>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>1.2.1.Final</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>deploy-artifact</goal>
+								</goals>
+								<configuration>
+									<groupId>org.postgresql</groupId>
+									<artifactId>postgresql</artifactId>
+									<name>postgresql.jar</name>
+								</configuration>
+							</execution>
+							<execution>
+								<id>add-datasource</id>
+								<phase>package</phase>
+								<goals>
+									<goal>add-resource</goal>
+								</goals>
+								<configuration>
+									<address>subsystem=datasources,data-source=PostgreSQLDS</address>
+									<resources>
+										<resource>
+											<properties>
+												<jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
+												<enabled>true</enabled>
+												<connection-url>jdbc:postgresql://postgres:5432/postgres</connection-url>
+												<driver-class>org.postgresql.Driver</driver-class>
+												<driver-name>postgresql.jar</driver-name>
+												<user-name>postgres</user-name>
+												<password>postgres</password>
+											</properties>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.7.0</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
+					</plugin>
+				</plugins>
+
+			</build>
+		</profile>
 		<profile>
 			<!-- When built in OpenShift the 'openshift' profile will be used when 
 				invoking mvn. -->
@@ -323,8 +326,8 @@
 				</plugins>
 			</build>
 		</profile>
-		
-		
+
+
 	</profiles>
 
 	<packaging>war</packaging>
