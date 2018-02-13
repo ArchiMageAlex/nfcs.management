@@ -259,7 +259,7 @@
 									<properties>
 										<jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
 										<enabled>true</enabled>
-										<connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
+										<connection-url>jdbc:postgresql://postgres:5432/postgres</connection-url>
 										<driver-class>org.postgresql.Driver</driver-class>
 										<driver-name>postgresql.jar</driver-name>
 										<user-name>postgres</user-name>
